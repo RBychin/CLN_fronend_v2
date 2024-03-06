@@ -1,63 +1,41 @@
 import { Swiper, SwiperSlide } from "swiper/react";
 import {  } from 'swiper/modules';
 import 'swiper/css'
+import 'swiper/css/effect-fade';
+import {useCallback, useEffect, useState} from "react";
 
+export const StoriesSwiper = ({ storyList }) => {
 
-export const StoriesSwiper = (data) => {
+    const [lineWidth, setLineWidth] = useState(1)
 
-    const stCount = Math.round(window.innerWidth / 160)
-    console.log(stCount)
+    const getLineWidth = useCallback(() => {
+        const block = document.getElementById('storiesLine');
+        setLineWidth(Math.min(Math.floor(block.offsetWidth / 100), storyList.length));
+    },[storyList])
+
+    useEffect(() => {
+        getLineWidth()
+    }, [getLineWidth]);
+
+    window.addEventListener('resize', getLineWidth);
+
 
     return (
         <Swiper
             modules={[]}
-            spaceBetween={120}
-            slidesPerView={stCount}
+            slidesPerView={lineWidth - 0.3}
             onSlideChange={() => console.log('slide change')}
             onSwiper={(swiper) => console.log(swiper)}
         >
-            <SwiperSlide>
-                <div className='story-card'
-                     style={{backgroundImage: "url('https://bestmebelik.ru/UserFiles/Image/Pasha-stati/kuda-postavit-router-v-kvartire-s-dizajnerskim-remontom-18.jpg')"}}>
-                    <div className='story-title'>Лучшие роутеры 2023</div>
-                </div>
-            </SwiperSlide>
-            <SwiperSlide>
-                <div className='story-card'
-                     style={{backgroundImage: "url('https://s.digitalocean.ru/upload/1681989732_news_file_4704_5beaf10d1da42.jpg')"}}>
-                    <div className='story-title'>Почему 5G убивает</div>
-                </div>
-            </SwiperSlide>
-            <SwiperSlide>
-                <div className='story-card'
-                     style={{backgroundImage: "url('https://gamebomb.ru/files/galleries/001/9/97/291496.jpg')"}}>
-                    <div className='story-title'>Новый КИНОТЕАТР</div>
-                </div>
-            </SwiperSlide>
-            <SwiperSlide>
-                <div className='story-card'
-                     style={{backgroundImage: "url('https://i.pinimg.com/736x/cb/82/3a/cb823aa470f9437703ae91e0a971d778.jpg')"}}>
-                    <div className='story-title'>Шапочки из фольги</div>
-                </div>
-            </SwiperSlide>
-            <SwiperSlide>
-                <div className='story-card'
-                     style={{backgroundImage: "url('https://u.9111s.ru/uploads/202305/29/d23e7f851c9dd3726c67e7c6c416392c.jpg')"}}>
-                    <div className='story-title'>Какая-то захватывающая история</div>
-                </div>
-            </SwiperSlide>
-            <SwiperSlide>
-                <div className='story-card'
-                     style={{backgroundImage: "url('https://proprikol.ru/wp-content/uploads/2019/12/les-krasivye-kartinki-na-rabochij-stol-1.jpg')"}}>
-                    <div className='story-title'>Проверка</div>
-                </div>
-            </SwiperSlide>
-            <SwiperSlide>
-                <div className='story-card'
-                     style={{backgroundImage: "url('https://i.pinimg.com/736x/cb/82/3a/cb823aa470f9437703ae91e0a971d778.jpg')"}}>
-                    <div className='story-title'>Шапочки из фольги</div>
-                </div>
-            </SwiperSlide>
+            {storyList.map((content, index) => (
+                <SwiperSlide>
+                    <div className={content.isActive?'story-card active': 'story-card'}
+                         style={{backgroundImage: `url('${content.url}')`}}>
+                        <div className='story-title'>{content.title}</div>
+                    </div>
+                </SwiperSlide>
+            ))}
+
         </Swiper>
     )
 }

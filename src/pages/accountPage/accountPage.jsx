@@ -22,7 +22,7 @@ export const AccountPage = () => {
             </div>
             <div className='block vw-85 gradient'>
                 <p className='hint'>Узнай больше</p>
-                <StoriesList/>
+                <StoriesList />
             </div>
             <div className='block vw-85'>
                 <p className='hint'>Аккаунт</p>
