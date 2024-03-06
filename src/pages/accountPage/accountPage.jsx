@@ -26,8 +26,8 @@ export const AccountPage = () => {
             </div>
             <div className='block vw-85'>
                 <p className='hint'>Аккаунт</p>
-                <AccountsList id='14107' balance='-14.03' status={false}/>
-                <AccountsList id='1398' balance='23.6' status={true}/>
+                <AccountsList id='14107' balance='-14.03' status={false} account='gnom_95'/>
+                <AccountsList id='1398' balance='23.6' status={true} account='spider'/>
             </div>
             <div className='block vw-85 gradient-end'>
                 <p className='hint'>История операций</p>

@@ -1,19 +1,18 @@
 import { Swiper, SwiperSlide } from "swiper/react";
-import { Pagination } from 'swiper/modules';
-import 'swiper/css/pagination';
+import {  } from 'swiper/modules';
 import 'swiper/css'
 
 
 export const StoriesSwiper = (data) => {
 
-    const stCount = Math.round(window.innerWidth / 150)
+    const stCount = Math.round(window.innerWidth / 160)
+    console.log(stCount)
 
     return (
         <Swiper
-            modules={[Pagination]}
-            spaceBetween={10}
-            slidesPerView={+stCount + 0.2}
-            pagination={{ clickable: true }}
+            modules={[]}
+            spaceBetween={120}
+            slidesPerView={stCount}
             onSlideChange={() => console.log('slide change')}
             onSwiper={(swiper) => console.log(swiper)}
         >
