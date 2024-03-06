@@ -29,10 +29,12 @@ export const StoriesSwiper = ({ storyList }) => {
         >
             {storyList.map((content, index) => (
                 <SwiperSlide>
-                    <div className={content.isActive?'story-card active': 'story-card'}
-                         style={{backgroundImage: `url('${content.url}')`}}>
-                        <div className='story-title'>{content.title}</div>
-                    </div>
+                    <a href={content.src}>
+                        <div className={content.isActive?'story-card active': 'story-card'}
+                             style={{backgroundImage: `url('${content.imgUrl}')`}}>
+                            <div className='story-title'>{content.title}</div>
+                        </div>
+                    </a>
                 </SwiperSlide>
             ))}
 

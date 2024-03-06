@@ -1,4 +1,3 @@
-import './App.css';
 import {Routes, Route, Navigate} from 'react-router-dom';
 
 import { LoginPage } from './pages/loginPage/loginPage';
@@ -16,6 +15,9 @@ function App() {
                 <Route path='account' element={<AccountPage />} />
             </Route>
         </Routes>
+        <a href='https://telegra.ph/Test-03-06-327'>TEST</a>
+
+
     </div>
   );
 }

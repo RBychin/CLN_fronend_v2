@@ -1,9 +1,26 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
 
+
+:root {
+  --bg-color: #000;
+  --block-color: #111;
+  --plate-color: #333;
+
+  --font-color: #fff;
+  --hint-color: #aaa;
+
+  --thin-border-color: rgba(256,256,256,0.1);
+
+  --firm-color: rgba(24,154,222,0.2);
+
+  --story-active-color: rgba(255, 105, 32, 0.8);
+  --story-title-color: rgba(10, 10, 10, 0.5);
+}
+
+
 * {
   margin: 0;
   padding: 0;
-  color: #fff;
   font-family: "Roboto", sans-serif;
   font-weight: 400;
   font-style: normal;
@@ -11,7 +28,170 @@
 
 
 body {
-  background-color: #222;
+  background-color: var(--bg-color);
+  color: var(--font-color);
   text-align: center;
   margin: 0 auto;
+}
+
+a {
+  color: var(--font-color);
+  text-decoration: var(--font-color); /* Убираем подчеркивание ссылок */
+}
+
+.gradient {
+  background: linear-gradient(175deg, var(--firm-color) 5%, rgba(24,154,222,0) 32%, rgba(34,114,156,0) 63%);
+}
+
+.radial {
+  background: radial-gradient(circle, var(--firm-color) 0%, rgba(24,154,222,0) 33%, rgba(51,51,51,0) 93%);
+}
+
+.gradient-end {
+  background: linear-gradient(352deg, var(--firm-color) 0%, rgba(24,154,222,0) 63%, rgba(51,51,51,0) 100%);
+}
+
+.block {
+  padding: 10px;
+  max-width: 900px;
+  background-color: var(--block-color);
+  border-radius: 15px;
+  margin: 20px auto;
+}
+
+.hint {
+  font-size: 12px;
+  text-align: left;
+  color: var(--hint-color);
+}
+
+.vw-90 {
+  width: 90vw;
+}
+
+.vw-85 {
+  width: 85vw;
+}
+
+.vw-80 {
+  width: 80vw;
+}
+
+.vw-70 {
+  width: 70vw;
+}
+
+.padd-10 {
+  padding: 10px;
+}
+
+.hr-padd-10 {
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+.vr-margin-10 {
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  max-width: 500px;
+  margin: 20px auto;
+  padding: 10px;
+}
+
+.shadow {
+  border: var(--thin-border-color) solid 1px;
+  background-color: var(--plate-color);
+  border-radius: 10px;
+  box-shadow: 0 0 40px 2px var(--firm-color);
+  /*box-shadow: 10px 18px 7px -4px rgba(0,0,0,0.1);*/
+}
+
+.grid {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.border-bottom {
+  padding-bottom: 7px;
+  border-bottom: var(--thin-border-color) solid 1px;
+}
+
+.left-text {
+  text-align: left;
+  flex-grow: 1;
+}
+
+.right-text {
+  text-align: right;
+  flex-grow: 1;
+}
+
+.flex {
+  display: flex;
+}
+
+.userimage {
+  margin: auto 0;
+  width: 30px;
+  height: 30px;
+  border: var(--font-color) solid 2px;
+  border-radius: 100%;
+  object-fit: cover;
+}
+
+.username {
+  font-size: 14px;
+  font-weight: 500;
+  flex-direction: column;
+  margin: auto 7px;
+}
+
+.story-card {
+  margin: 10px;
+  display: flex;
+  width: 100px;
+  aspect-ratio: 20 / 21;
+  border-radius: 15px;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+}
+
+.active {
+  box-shadow: 0 0 1px 2px var(--story-active-color);
+  border: 1px solid var(--story-active-color);
+}
+
+.story-title {
+  background-color: var(--story-title-color);
+  font-size: 12px;
+  font-weight: 400;
+  text-align: left;
+  margin: auto;
+}
+
+.icon {
+  flex-grow: 0;
+  flex-shrink: 0;
+  width: 30px;
+  height: 30px;
+}
+
+/*FONTS*/
+.text-weight-700 {
+  font-weight: 700;
+}
+
+.text-weight-500 {
+  font-weight: 500;
+}
+
+.text-weight-300 {
+  font-weight: 300;
 }
