@@ -3,6 +3,9 @@ import {  } from 'swiper/modules';
 import 'swiper/css'
 import 'swiper/css/effect-fade';
 import {useCallback, useEffect, useState} from "react";
+import {postApiRequest} from "../../utills/requests";
+import {Config as cfg} from "../../utills/config";
+
 
 export const StoriesSwiper = ({ storyList }) => {
 
@@ -15,9 +18,18 @@ export const StoriesSwiper = ({ storyList }) => {
 
     useEffect(() => {
         getLineWidth()
+        window.addEventListener('resize', getLineWidth);
+        return () => window.removeEventListener('resize', getLineWidth)
     }, [getLineWidth]);
 
-    window.addEventListener('resize', getLineWidth);
+
+    const onClickStory = (url, id) => {
+        const fetchData = async () => {
+            await postApiRequest('/stories', {id: cfg.telegram_id, story: id})
+        }
+        fetchData()
+        window.open(url)
+    }
 
 
     return (
@@ -28,13 +40,13 @@ export const StoriesSwiper = ({ storyList }) => {
             onSwiper={(swiper) => console.log(swiper)}
         >
             {storyList.map((content, index) => (
-                <SwiperSlide>
-                    <a href={content.src}>
-                        <div className={content.isActive?'story-card active': 'story-card'}
-                             style={{backgroundImage: `url('${content.imgUrl}')`}}>
-                            <div className='story-title'>{content.title}</div>
+                <SwiperSlide key={content.id}>
+                    <div onClick={() => {onClickStory(content.url, content.id)}}>
+                        <div className={content.viewed?'story-card': 'story-card active'}
+                             style={{backgroundImage: `url('${content.image}')`}}>
+                            <div className='story-title'>{content.name}</div>
                         </div>
-                    </a>
+                    </div>
                 </SwiperSlide>
             ))}
 

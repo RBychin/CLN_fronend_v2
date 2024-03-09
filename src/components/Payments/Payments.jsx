@@ -1,31 +1,29 @@
 import send from "../../icons/send.svg";
-import recive from "../../icons/recive.svg";
 
 export const PaymentList = ({
-    status
+    data
                             }) => {
+
+    if (!data || data.length === 0) {
+        return <div>Загружаем...</div>;
+    }
+
     return (
-        <>
-            <div className='card vw-80'>
-                <div className='grid border-bottom vr-margin-10'>
-                    <img alt='status' className='icon' src={status ? recive : send}/>
-                    <span className='left-text hr-padd-10'>Пополнение счета через {'{object}'}
-                        <p><small className='hint'>11 февраля 2024</small></p></span>
-                    <span className='right-text'>500 ₽<p><small className='hint'>Получено</small></p></span>
-                </div>
-                <div className='grid border-bottom vr-margin-10'>
-                    <img alt='status' className='icon' src={status ? recive : send}/>
-                    <span className='left-text hr-padd-10'>Пополнение счета через {'{object}'}
-                        <p><small className='hint'>15 января 2024</small></p></span>
-                    <span className='right-text'>300 ₽<p><small className='hint'>Получено</small></p></span>
-                </div>
-                <div className='grid border-bottom vr-margin-10'>
-                    <img alt='status' className='icon' src={status ? recive : send}/>
-                    <span className='left-text hr-padd-10'>Пополнение счета через {'{object}'}
-                        <p><small className='hint'>7 декабря 2023</small></p></span>
-                    <span className='right-text'>600 ₽<p><small className='hint'>Получено</small></p></span>
+        <>{data.map((obj, index) => (
+            <div key={index} className='card vw-80'>
+                <div className='grid border-bottom'>
+                    <img alt='status' className='icon' src={send}/>
+                    <span className='left-text hr-padd-10'>{obj.comment}
+                        <p><small className='hint'>{formatDate(obj.date)}</small></p></span>
+                    <span className='right-text'>{obj.sum}₽<p><small className='hint'>{obj.id}</small></p></span>
                 </div>
             </div>
+        ))}
         </>
     )
 }
+
+const formatDate = (dateString) => {
+    const date = new Date(dateString);
+    return date.toLocaleDateString('ru-RU', { day: 'numeric', month: 'long', year: 'numeric', hour: 'numeric', minute: '2-digit' });
+};

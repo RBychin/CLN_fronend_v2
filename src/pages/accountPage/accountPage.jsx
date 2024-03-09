@@ -2,11 +2,43 @@ import {StoriesList} from "../../components/storiesList/storiesList";
 import {AccountsList} from "../../components/accountsList/accountsList";
 import {PaymentList} from "../../components/Payments/Payments";
 
-export const AccountPage = () => {
+import { useEffect, useState } from 'react'
+import {getApiRequest} from "../../utills/requests";
+import {Config} from "../../utills/config";
+import {Loading} from "../../components/Loading";
+
+export const AccountPage = ({ user }) => {
+    const data = Object.values(user)
+    const [transactions, setTransactions] = useState();
+    const [stories, setStories] = useState();
+    const [loading, setLoading] = useState(true)
+
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                const [transactionsResponse, storiesResponse] = await Promise.all([
+                    getApiRequest('/transactions', { id: Config.telegram_id }),
+                    getApiRequest('/stories', { id: Config.telegram_id })
+                ]);
+                setTimeout(() => {
+                    setTransactions(Object.values(transactionsResponse));
+                    setStories(storiesResponse);
+                }, 2);
+            } catch (error) {
+                console.error('Error fetching data:', error);
+            } finally {
+                setLoading(false)
+            }
+        };
+
+        fetchData();
+    }, []);
+
     return (
-        <>
-            <div className='block vw-85'>
-                <div className='grid hr-padd-10'>
+            <>{loading?<Loading />: (
+                <>
+                    <div className='block vw-85'>
+                        <div className='grid hr-padd-10'>
                     <span className='left-text'>
                         <div className='flex'>
                             <img
@@ -15,24 +47,34 @@ export const AccountPage = () => {
                             <p className='username'>Roman Bychin</p>
                         </div>
                     </span>
-                    <span className='right-text'>
+                            <span className='right-text'>
                         ...
                     </span>
-                </div>
-            </div>
-            <div className='block vw-85 gradient'>
-                <p className='hint'>Узнай больше</p>
-                <StoriesList />
-            </div>
-            <div className='block vw-85'>
-                <p className='hint'>Аккаунт</p>
-                <AccountsList id='14107' balance='-14.03' status={false} account='gnom_95'/>
-                <AccountsList id='1398' balance='23.6' status={true} account='spider'/>
-            </div>
-            <div className='block vw-85 gradient-end'>
-                <p className='hint'>История операций</p>
-                <PaymentList/>
-            </div>
-        </>
-    )
-}
+                        </div>
+                    </div>
+                    <a href='/v2/add_acc'>LOGIN</a>
+                    <div className='block vw-85 gradient'>
+                        <p className='hint'>Узнай больше</p>
+                        <StoriesList stories={stories}/>
+                    </div>
+                    <div className='block vw-85'>
+                        <p className='hint'>Аккаунт</p>
+                        {data.map((point, index) => (
+                            point.error ? (
+                                <AccountsList key={index} id={point.pin} balance='' status={false}
+                                              account={point.error}/>
+                            ) : (
+                                <AccountsList key={index} id={point.pin} balance={point.balance} status={true}
+                                              account={Object.keys(point.points)[0]}/>
+                            )
+                        ))}
+                    </div>
+                    <div className='block vw-85 gradient-end'>
+                        <p className='hint'>История операций</p>
+                        <PaymentList data={transactions}/>
+                    </div>
+                </>)}
+
+            </>
+    );
+    }
