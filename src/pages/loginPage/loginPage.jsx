@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import {useCallback, useState} from 'react';
 import { InputComponent } from "../../components/input/Input";
 import { Config } from "../../utills/config";
 import { postApiRequest } from "../../utills/requests";
@@ -14,7 +14,7 @@ export const LoginPage = () => {
 
     const [loading, setLoading] = useState(false);
 
-    const onClickLogin = async () => {
+    const onClickLogin = useCallback(async() => {
         setLoading(true)
         try {
             const response = await postApiRequest('', { id: Config.telegram_id }, { pin: +idValue, password: passwordValue });
@@ -32,7 +32,7 @@ export const LoginPage = () => {
                 setLoading(false)
             }, 1000);
         }
-    };
+    }, [idValue, passwordValue, navigate])
 
     return (
         <>
@@ -65,9 +65,12 @@ export const LoginPage = () => {
                         />
 
                         {isFormValid &&
-                            <div className='card' onClick={onClickLogin}>
+                            <div className='vr-margin-30'>
+                                <span className='glow' onClick={onClickLogin}>
                                 LOGIN
+                            </span>
                             </div>
+
                         }
                     </div>
                 </div>

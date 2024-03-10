@@ -7,7 +7,7 @@ import {postApiRequest} from "../../utills/requests";
 import {Config as cfg} from "../../utills/config";
 
 
-export const StoriesSwiper = ({ storyList }) => {
+export const StoriesSwiper = ({ storyList, updateStories }) => {
 
     const [lineWidth, setLineWidth] = useState(1)
 
@@ -26,6 +26,7 @@ export const StoriesSwiper = ({ storyList }) => {
     const onClickStory = (url, id) => {
         const fetchData = async () => {
             await postApiRequest('/stories', {id: cfg.telegram_id, story: id})
+            updateStories()
         }
         fetchData()
         window.open(url)

@@ -5,7 +5,7 @@ export const PaymentList = ({
                             }) => {
 
     if (!data || data.length === 0) {
-        return <div>Загружаем...</div>;
+        return <div>Не удается загрузить данные...</div>;
     }
 
     return (

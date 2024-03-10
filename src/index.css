@@ -5,6 +5,7 @@
   --bg-color: #000;
   --block-color: #111;
   --plate-color: rgba(50, 58, 68, 0.7);
+  --menu-color: #222;
 
   --font-color: #fff;
   --hint-color: #aaa;
@@ -104,6 +105,10 @@ a {
   width: 70vw;
 }
 
+.vw-65 {
+  width: 65vw;
+}
+
 .padd-10 {
   padding: 10px;
 }
@@ -118,6 +123,16 @@ a {
   margin-bottom: 10px;
 }
 
+.vr-margin-20 {
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+.vr-margin-30 {
+  margin-top: 30px;
+  margin-bottom: 30px;
+}
+
 .card {
   display: flex;
   flex-direction: column;
@@ -127,11 +142,23 @@ a {
 }
 
 .glow {
+  transition: box-shadow 0.3s ease;
   box-shadow: 0 0 40px 2px var(--firm-color);
 }
 
+.glow:hover {
+  cursor: pointer;
+  box-shadow: 0 0 40px 10px var(--firm-color);
+}
+
 .red-glow {
+  transition: box-shadow 0.3s ease;
   box-shadow: 0 0 40px 2px var(--error-color);
+}
+
+.red-glow:hover {
+  cursor: pointer;
+  box-shadow: 0 0 40px 10px var(--error-color);
 }
 
 .plate {
@@ -187,6 +214,7 @@ a {
 }
 
 .story-card {
+  transition: 0.3s ease;
   margin: 10px;
   display: flex;
   width: 100px;
@@ -197,9 +225,18 @@ a {
   background-size: cover;
 }
 
+.story-card:hover {
+  transition:  0.4s ease;
+  scale: 0.9;
+}
+
 .active {
   box-shadow: 0 0 3px 2px var(--story-active-color);
   border: 1px solid var(--story-active-color);
+}
+
+.active:hover {
+  box-shadow: 0 0 10px 1px var(--story-active-color);
 }
 
 .story-title {
@@ -217,6 +254,11 @@ a {
   height: 30px;
 }
 
+.icon-small {
+  width: 20px;
+  opacity: 70%;
+}
+
 /*FONTS*/
 .text-weight-700 {
   font-weight: 700;
@@ -228,4 +270,58 @@ a {
 
 .text-weight-300 {
   font-weight: 300;
+}
+
+.add-account {
+  transition: 0.5s ease;
+  opacity: 5%;
+}
+
+.add-account:hover {
+  cursor: pointer;
+  opacity: 90%;
+}
+
+.gradient-background {
+  background: linear-gradient(153deg, var(--firm-color) 0%, var(--plate-color) 41%, var(--plate-color) 62%, var(--firm-color) 100%);
+  background-size: 400% 230%;
+  animation: gradient-animation 40s ease infinite;
+}
+
+@keyframes gradient-animation {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+.container {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.5s ease; /* Добавляем переход для свойства max-height */
+}
+
+.container.show {
+  max-height: 60px; /* Пример значения высоты. Укажите нужное вам */
+}
+
+.test-1 {
+  background-color: #007aff;
+}
+
+.bottom-margin-0 {
+  margin-bottom: 0;
+}
+
+.slide-menu {
+  background-color: var(--menu-color);
+  border: var(--thin-border-color) solid 1px;
+  padding: 10px;
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
 }
