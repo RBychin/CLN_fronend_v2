@@ -9,11 +9,13 @@ import {Loading} from "../../components/Loading";
 import {useNavigate} from "react-router-dom";
 import addAccIcon from '../../icons/add_acc.svg'
 import {AccountHeader} from "../../components/AccountHeader/AccountHeader";
+import {LoginPage} from "../loginPage/loginPage";
 
 export const AccountPage = ({ user, setUser }) => {
     const navigate = useNavigate()
     const [transactions, setTransactions] = useState(null);
     const [loading, setLoading] = useState(true)
+    const [login, setLogin] = useState(false)
 
     const goToLogin = () => {
         setUser({...user, state: 'login'})
@@ -61,12 +63,19 @@ export const AccountPage = ({ user, setUser }) => {
                                       account={Object.keys(point.points)[0]}/>
                     )
                 ))}
-                <div onClick={goToLogin}><img alt='add' className='icon add-account vr-margin-10 bottom-margin-0' src={addAccIcon} /></div>
+                <div className={`container-login ${login ? 'show' : ''}`}>
+                        <div><LoginPage /></div>
+                </div>
+                <div>
+                    <img onClick={() => {setLogin(!login)}} alt='add' className={`icon add-account vr-margin-10 bottom-margin-0 ${login? "rotate-45": ""}`} src={addAccIcon} />
+                </div>
             </div>
-            <div className='block vw-85 gradient-end'>
-                <p className='hint'>История операций</p>
-                <PaymentList data={transactions}/>
-            </div>
+            {transactions && (
+                <div className='block vw-85 gradient-end'>
+                    <p className='hint'>История операций</p>
+                    <PaymentList data={transactions}/>
+                </div>
+            )}
         </>
     );
     }

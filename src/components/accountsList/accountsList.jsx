@@ -33,22 +33,24 @@ export const AccountsList = ({
                     </span>
                 </div>
             </div>
-            <div className='slide-menu vw-65 margin-auto'>
-                <div className={`grid container ${active ? 'show' : ''}`}>
+            {status && (
+                <div className='slide-menu vw-65 margin-auto'>
+                    <div className={`grid container ${active ? 'show' : ''}`}>
                     <span className='center margin-auto'>
                         <img alt="icon-small" className='icon-small' src={plusIcon}/>
                         <p className='hint'>Пополнить</p>
                     </span>
-                    <span className='center margin-auto'>
+                        <span className='center margin-auto'>
                         <img alt="icon-small" className='icon-small' src={settingsIcon}/>
                         <p className='hint'>Настройки</p>
                     </span>
-                    <span className='center margin-auto'>
+                        <span className='center margin-auto'>
                         <img alt="icon-small" className='icon-small' src={closeIcon}/>
                         <p className='hint'>Выйти</p>
                     </span>
+                    </div>
                 </div>
-            </div>
+            )}
         </>
     )
 }

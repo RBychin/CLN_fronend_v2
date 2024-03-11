@@ -34,10 +34,15 @@ export const LoginPage = () => {
         }
     }, [idValue, passwordValue, navigate])
 
+    if (loading) {
+        return (
+            <Loading />
+        )
+    }
+
     return (
         <>
-            {loading?<Loading />: (
-            <div className='vh-100 margin-auto flex center'>
+            <div className='margin-auto flex center'>
                 <div className='vw-85 margin-auto'>
                     <div className='margin-auto center'>
                         {loginError &&
@@ -75,7 +80,6 @@ export const LoginPage = () => {
                     </div>
                 </div>
             </div>
-        )}
         </>
     );
 };

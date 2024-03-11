@@ -6,6 +6,7 @@ import {Loading} from "../Loading";
 
 export const StoriesList = () => {
     const [stories, setStories] = useState(null)
+    const [loading, setLoading] = useState(true)
 
     const updateStories = () => {
         const fetchData = async () => {
@@ -14,10 +15,13 @@ export const StoriesList = () => {
                     getApiRequest('/stories', { id: Config.telegram_id })
                 ]);
                 setStories(Object.values(storiesResponse));
-                setStories(storiesResponse);
+                // setStories(storiesResponse);
             } catch (error) {
                 console.error('Error fetching data:', error);
             } finally {
+                setTimeout(() => {
+                    setLoading(false)
+                }, 500)
                 console.log(stories)
             }
         };
@@ -29,8 +33,9 @@ export const StoriesList = () => {
         updateStories()
     }, []);
 
-    if (!stories) {
-        <p>Загружаю</p>
+
+    if (!stories || loading) {
+        return (<div>Загружаем...</div>)
     }
 
     return (

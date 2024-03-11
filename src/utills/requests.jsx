@@ -7,7 +7,8 @@ export const getApiRequest = async (prefix, params_data) => {
             method: 'GET',
             headers: {
                 'Authorization': `Token ${cfg.apiToken}`,
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
+                'ngrok-skip-browser-warning':'Any'
             }
         });
     return await response.json()
@@ -21,7 +22,8 @@ export const postApiRequest = async (prefix, params_data, data) => {
             method: 'POST',
             headers: {
                 'Authorization': `Token ${cfg.apiToken}`,
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
+                'ngrok-skip-browser-warning': 'Any'
             },
             body: JSON.stringify(data)
         });
