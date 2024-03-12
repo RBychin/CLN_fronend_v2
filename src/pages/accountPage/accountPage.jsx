@@ -27,9 +27,10 @@ export const AccountPage = ({ user, setUser }) => {
         const fetchData = async () => {
             try {
                 const [transactionsResponse] = await Promise.all([
-                    getApiRequest('/transactions', { id: Config.telegram_id })
+                    getApiRequest('/transactions', { id: Config.user.id })
                 ]);
                 setTransactions(Object.values(transactionsResponse));
+                Config.tgWindow.HapticFeedback.notificationOccurred('success')
             } catch (error) {
                 console.error('Error fetching data:', error);
             } finally {
@@ -48,26 +49,33 @@ export const AccountPage = ({ user, setUser }) => {
             <div className='block vw-85 gradient-background'>
             <AccountHeader />
             </div>
-            <div className='block vw-85 gradient'>
-                <p className='hint'>Узнай больше</p>
                 <StoriesList />
-            </div>
             <div className='block vw-85'>
                 <p className='hint'>Аккаунт</p>
                 {Object.values(user.data).map((point, index) => (
                     point.error ? (
-                        <AccountsList key={index} id={point.pin} balance='' status={false}
-                                      account={point.error}/>
+                        <AccountsList key={index}
+                                      id={point.pin}
+                                      balance=''
+                                      status={false}
+                                      account={point.error}
+                                      setUser={setUser}
+                                      user={user}/>
                     ) : (
-                        <AccountsList key={index} id={point.pin} balance={point.balance} status={true}
-                                      account={Object.keys(point.points)[0]}/>
+                        <AccountsList key={index}
+                                      id={point.pin}
+                                      balance={point.balance}
+                                      status={true}
+                                      account={Object.keys(point.points)[0]}
+                                      setUser={setUser}
+                                      user={user}/>
                     )
                 ))}
                 <div className={`container-login ${login ? 'show' : ''}`}>
-                        <div><LoginPage /></div>
+                        <div onClick={() => {setUser({...user, state:'login'}); navigate('/login')}}>Добавить аккаунт</div>
                 </div>
                 <div>
-                    <img onClick={() => {setLogin(!login)}} alt='add' className={`icon add-account vr-margin-10 bottom-margin-0 ${login? "rotate-45": ""}`} src={addAccIcon} />
+                    <img onClick={() => {setLogin(!login)}} alt='add' className={`icon add-account vr-margin-10 bottom-margin-0 ${login? "rotate-45 active": ""}`} src={addAccIcon} />
                 </div>
             </div>
             {transactions && (

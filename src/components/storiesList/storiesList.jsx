@@ -12,7 +12,7 @@ export const StoriesList = () => {
         const fetchData = async () => {
             try {
                 const [storiesResponse] = await Promise.all([
-                    getApiRequest('/stories', { id: Config.telegram_id })
+                    getApiRequest('/stories', { id: Config.user.id })
                 ]);
                 setStories(Object.values(storiesResponse));
                 // setStories(storiesResponse);
@@ -21,7 +21,7 @@ export const StoriesList = () => {
             } finally {
                 setTimeout(() => {
                     setLoading(false)
-                }, 500)
+                }, 0)
                 console.log(stories)
             }
         };
@@ -39,8 +39,16 @@ export const StoriesList = () => {
     }
 
     return (
-        <div className='flex vr-margin-10' id='storiesLine'>
-            {stories && <StoriesSwiper storyList={stories} updateStories={updateStories} />}
-        </div>
+        <>
+            {stories.length > 0 && (
+                <div className='block vw-85 gradient'>
+                    <p className='hint'>Узнай больше</p>
+                    <div className='flex vr-margin-10' id='storiesLine'>
+                        {stories && <StoriesSwiper storyList={stories} updateStories={updateStories} />}
+                    </div>
+                </div>
+            )}
+
+        </>
     );
 };

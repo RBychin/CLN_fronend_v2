@@ -4,7 +4,7 @@ import 'swiper/css'
 import 'swiper/css/effect-fade';
 import {useCallback, useEffect, useState} from "react";
 import {postApiRequest} from "../../utills/requests";
-import {Config as cfg} from "../../utills/config";
+import {Config, Config as cfg} from "../../utills/config";
 
 
 export const StoriesSwiper = ({ storyList, updateStories }) => {
@@ -25,12 +25,15 @@ export const StoriesSwiper = ({ storyList, updateStories }) => {
 
     const onClickStory = (url, id) => {
         const fetchData = async () => {
-            await postApiRequest('/stories', {id: cfg.telegram_id, story: id})
+            await postApiRequest('/stories', {id: cfg.user.id, story: id})
             updateStories()
         }
         fetchData()
+        Config.tgWindow.HapticFeedback.impactOccurred('light')
         window.open(url)
     }
+
+    console.log(storyList)
 
     return (
         <Swiper
@@ -43,7 +46,11 @@ export const StoriesSwiper = ({ storyList, updateStories }) => {
                 <SwiperSlide key={content.id}>
                     <div onClick={() => {onClickStory(content.url, content.id)}}>
                         <div className={content.viewed?'story-card': 'story-card active'}
-                             style={{backgroundImage: `url('${content.image}')`}}>
+                             style={
+                            {
+                                backgroundImage: `url("${content.image}")`
+                            }
+                        }>
                             <div className='story-title'>{content.name}</div>
                         </div>
                     </div>

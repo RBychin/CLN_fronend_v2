@@ -1,8 +1,8 @@
-import {useCallback, useState} from 'react';
+import {useCallback, useEffect, useState} from 'react';
 import { InputComponent } from "../../components/input/Input";
 import { Config } from "../../utills/config";
 import { postApiRequest } from "../../utills/requests";
-import { useNavigate } from "react-router-dom";
+import {useLocation, useNavigate} from "react-router-dom";
 import {Loading} from "../../components/Loading";
 
 export const LoginPage = () => {
@@ -11,13 +11,14 @@ export const LoginPage = () => {
     const [loginError, setLoginError] = useState(null);
     const isFormValid = idValue.length > 0 && passwordValue.length > 0;
     const navigate = useNavigate();
+    const location = useLocation()
 
     const [loading, setLoading] = useState(false);
 
     const onClickLogin = useCallback(async() => {
         setLoading(true)
         try {
-            const response = await postApiRequest('', { id: Config.telegram_id }, { pin: +idValue, password: passwordValue });
+            const response = await postApiRequest('', { id: Config.user.id }, { pin: +idValue, password: passwordValue });
             if (!response.error) {
                 navigate('/account');
             } else {
@@ -34,6 +35,12 @@ export const LoginPage = () => {
         }
     }, [idValue, passwordValue, navigate])
 
+    useEffect(() => {
+        if (location.state) {
+            setIdValue(location.state.idValue)
+        }
+    }, []);
+
     if (loading) {
         return (
             <Loading />
@@ -42,7 +49,7 @@ export const LoginPage = () => {
 
     return (
         <>
-            <div className='margin-auto flex center'>
+            <div className='vh-100 margin-auto flex center'>
                 <div className='vw-85 margin-auto'>
                     <div className='margin-auto center'>
                         {loginError &&
