@@ -242,7 +242,8 @@ a {
   transition: 0.3s ease;
   margin: 10px;
   display: flex;
-  width: 100px;
+  width: 24vw;
+  max-width: 120px;
   aspect-ratio: 20 / 21;
   border-radius: 15px;
   background-repeat: no-repeat;
@@ -255,12 +256,12 @@ a {
   scale: 0.9;
 }
 
-.active {
+.story-card.active {
   box-shadow: 0 0 3px 2px var(--story-active-color);
   border: 1px solid var(--story-active-color);
 }
 
-.active:hover {
+.story-card.active:hover {
   box-shadow: 0 0 10px 1px var(--story-active-color);
 }
 
@@ -307,6 +308,11 @@ a {
   opacity: 90%;
 }
 
+.add-account.active {
+  cursor: pointer;
+  opacity: 90%;
+}
+
 .container {
   max-height: 0;
   overflow: hidden;
@@ -326,8 +332,9 @@ a {
 }
 
 .container-login.show {
-  padding: 25px;
-  max-height: 200px; /* Пример значения высоты. Укажите нужное вам */
+  padding-bottom: 10px;
+  padding-top: 30px;
+  max-height: 60px; /* Пример значения высоты. Укажите нужное вам */
 }
 
 .rotate-45 {

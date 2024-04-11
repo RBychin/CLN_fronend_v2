@@ -21,14 +21,12 @@ function App() {
             }
         )
 
-    const updateUser = useCallback(() => {
-
-    }, [])
-
     useEffect(() => {
+        Config.tgWindow.expand()
+        console.log('PHOTO', Config.user.photo_url)
         const fetchData = async () => {
             try {
-                const response = await getApiRequest('', { id: Config.telegram_id });
+                const response = await getApiRequest('', { id: Config.user.id });
                 if (!response.error && !response.detail && user.state !== 'login') {
                     setUser({...user, data: response})
                     navigate('/account')
