@@ -5,6 +5,8 @@ import settingsIcon from '../../icons/settings.svg'
 import plusIcon from '../../icons/plus.svg'
 import closeIcon from '../../icons/cross-stop.svg'
 import {useNavigate} from "react-router-dom";
+import {getApiRequest, postApiRequest} from "../../utills/requests";
+import {Config} from "../../utills/config";
 
 export const AccountsList = ({
     id,
@@ -22,6 +24,13 @@ export const AccountsList = ({
     const onClickLogin = (idValue) => {
         setUser({...user, state: 'login'})
         navigate('/login', {state: {idValue}})
+    }
+
+    const onClickLogout= async () => {
+        const response = await getApiRequest(
+            '/logout',
+            {id: Config.user.id, pin: id}
+        )
     }
 
     const style = status?'card vw-70 plate glow bottom-margin-0': 'card vw-70 plate bottom-margin-0 red-glow'
@@ -46,16 +55,22 @@ export const AccountsList = ({
                 <div className='slide-menu vw-65 margin-auto'>
                     <div className={`grid container ${active ? 'show' : ''}`}>
                     <span className='center margin-auto'>
-                        <img alt="icon-small" className='icon-small' src={plusIcon}/>
-                        <p className='hint'>Пополнить</p>
+                        <a href="#">
+                            <img alt="icon-small" className='icon-small' src={plusIcon}/>
+                            <p className='hint'>Пополнить</p>
+                        </a>
                     </span>
-                        <span className='center margin-auto'>
-                        <img alt="icon-small" className='icon-small' src={settingsIcon}/>
-                        <p className='hint'>Настройки</p>
+                    <span className='center margin-auto'>
+                        <a href="#">
+                            <img alt="icon-small" className='icon-small' src={settingsIcon}/>
+                            <p className='hint'>Настройки</p>
+                        </a>
                     </span>
-                        <span className='center margin-auto'>
+                    <span className='center margin-auto'>
+                        <a href="#">
                         <img alt="icon-small" className='icon-small' src={closeIcon}/>
                         <p className='hint'>Выйти</p>
+                        </a>
                     </span>
                     </div>
                 </div>
@@ -68,7 +83,7 @@ export const AccountsList = ({
                         <img alt="icon-small" className='icon-small' src={plusIcon}/>
                         <p className='hint'>Войти</p>
                     </span>
-                    <span className='center margin-auto'>
+                    <span className='center margin-auto' onClick={onClickLogout}>
                         <img alt="icon-small" className='icon-small' src={closeIcon}/>
                         <p className='hint'>Удалить</p>
                     </span>

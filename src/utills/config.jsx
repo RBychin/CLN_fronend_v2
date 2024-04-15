@@ -21,8 +21,8 @@ const getConfig = () => {
     console.log(tgWindow)
 
     return {
-        apiToken: '52053baf54a991142b6af804e9de8a602cd4c297',
-        apiUrl: 'https://rbychin.ddns.net:6077/apiv2',
+        apiToken: '5ebda3a9a088e1a35bc1b28a4ac274ca7d37ff30',
+        apiUrl: 'http://127.0.0.1:8000/api',
         user: user,
         debug: true,
         tgWindow: tgWindow
