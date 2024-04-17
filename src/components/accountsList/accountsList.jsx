@@ -67,7 +67,7 @@ export const AccountsList = ({
                     </span>
                     <span className='right-text'>
                         <p><small>Баланс:</small></p>
-                        <p style={{color: +point.balance <= 0? "#ff5353": "#fff"}} className='text-weight-700'>
+                        <p style={{color: +point.balance <= 0? "#var(--error-color-text)": "var(--font-color)"}} className='text-weight-700'>
                             {point.balance} ₽
                         </p>
                     </span>

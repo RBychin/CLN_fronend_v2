@@ -1,16 +1,37 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
 
+/*:root {*/
+/*  --bg-color: rgb(0, 0, 0);*/
+/*  --block-color: #111;*/
+/*  --plate-color: rgba(50, 58, 68, 0.7);*/
+/*  --menu-color: #222;*/
+
+/*  --font-color: #fff;*/
+/*  --hint-color: #aaa;*/
+
+/*  --thin-border-color: rgba(256,256,256,0.1);*/
+
+/*  --firm-color: rgba(24,154,222,0.2);*/
+/*  --error-color: rgba(222, 24, 24, 0.2);*/
+/*  --error-color-text: rgba(222, 24, 24, 0.5);*/
+
+/*  --story-active-color: rgba(255, 105, 32, 0.8);*/
+/*  --story-title-color: rgba(10, 10, 10, 0.5);*/
+/*}*/
+
 
 :root {
-  --bg-color: rgb(0, 0, 0);
-  --block-color: #111;
-  --plate-color: rgba(50, 58, 68, 0.7);
-  --menu-color: #222;
+  --bg-color: var(--tg-theme-bg-color);
+  --block-color: hsl(from var(--tg-theme-hint-color) h s l / 0.1);
+  --block-color-non-op: var(--tg-theme-section-bg-color);
+  --plate-color: hsl(from var(--tg-theme-hint-color) h s l / 0.2);
+  --menu-color: hsl(from var(--tg-theme-header-bg-color) h s l / 0.4);
 
-  --font-color: #fff;
-  --hint-color: #aaa;
+  --font-color: var(--tg-theme-text-color);
+  --hint-color: var(--tg-theme-hint-color);
 
-  --thin-border-color: rgba(256,256,256,0.1);
+  /*--thin-border-color: rgba(256,256,256,0.1);*/
+  --thin-border-color: hsl(from var(--tg-theme-hint-color) h s l / 0.2);
 
   --firm-color: rgba(24,154,222,0.2);
   --error-color: rgba(222, 24, 24, 0.2);
@@ -18,6 +39,59 @@
 
   --story-active-color: rgba(255, 105, 32, 0.8);
   --story-title-color: rgba(10, 10, 10, 0.5);
+}
+
+.tg {
+  width: 100%;
+  height: 30px;
+}
+
+.tg-bg-color {
+  background-color: var(--tg-theme-bg-color);
+}
+
+.tg-text_color {
+  background-color: var(--tg-theme-text-color);
+}
+
+.tg-hint_color {
+  background-color: var(--tg-theme-hint-color);
+}
+
+.tg-link_color {
+  background-color: var(--tg-theme-link-color);
+}
+
+.tg-button_color {
+  background-color: var(--tg-theme-button-color);
+}
+
+.tg-button_text_color {
+  background-color: var(--tg-theme-button-text-color);
+}
+
+.tg-secondary_bg_color {
+  background-color: var(--tg-theme-secondary-bg-color);
+}
+
+.tg-header_bg_color {
+  background-color: var(--tg-theme-header-bg-color);
+}
+
+.tg-section_bg_color {
+  background-color: var(--tg-theme-section-bg-color);
+}
+
+.tg-accent_text_color {
+  background-color: var(--tg-theme-accent-text-color);
+}
+
+.tg-section_header_text_color {
+  background-color: var(--tg-theme-section-header-text-color);
+}
+
+.tg-subtitle_text_color {
+  background-color: var(--tg-theme-subtitle-text-color);
 }
 
 
@@ -263,7 +337,7 @@ a {
 .overlay .pay {
   border-radius: 15px;
   padding: 20px 0;
-  background-color: var(--block-color);
+  background-color: var(--block-color-non-op);
   margin: 40px auto;
   width: 92vw;
   max-width: 950px;

@@ -45,6 +45,7 @@ export const AccountPage = ({ user, setUser }) => {
 
     return (
         <>
+
             <div className='block vw-85 gradient-background'>
             <AccountHeader />
             </div>

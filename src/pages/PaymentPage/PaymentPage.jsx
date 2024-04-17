@@ -54,20 +54,21 @@ export const PaymentPage = ({
     }, []);
 
     useEffect(() => {
+        mainButton.onClick(payButton);
+
+        return () => {
+            mainButton.offClick(payButton);
+        };
+    }, [responseData]);
+
+    useEffect(() => {
         getQr()
     }, [sumValue]);
-
-    mainButton.onClick(payButton)
 
 
 
     return (
         <>
-            {/*{responseData && (*/}
-            {/*    <div>*/}
-            {/*        <p>Данные от API: {JSON.stringify(responseData.text)}</p>*/}
-            {/*    </div>*/}
-            {/*)}*/}
             <div className="overlay margin-auto flex" onClick={() => {setPay(false)}}>
                 <div className="pay gradient-background"
                      onClick={(e) => {

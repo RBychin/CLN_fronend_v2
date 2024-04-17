@@ -50,6 +50,20 @@ function App() {
 
     return (
         <div className="App">
+            {/*<div className="tg">*/}
+            {/*    <div className="tg tg-bg-color">bg-color</div>*/}
+            {/*    <div className="tg tg-text_color">text_color</div>*/}
+            {/*    <div className="tg tg-hint_color">hint_color</div>*/}
+            {/*    <div className="tg tg-link_color">link_color</div>*/}
+            {/*    <div className="tg tg-button_color">button_color</div>*/}
+            {/*    <div className="tg tg-button_text_color">button_text_color</div>*/}
+            {/*    <div className="tg tg-secondary_bg_color">secondary_bg_color</div>*/}
+            {/*    <div className="tg tg-header_bg_color">header_bg_color</div>*/}
+            {/*    <div className="tg tg-section_bg_color">section_bg_color</div>*/}
+            {/*    <div className="tg tg-accent_text_color">tg-accent_text_color</div>*/}
+            {/*    <div className="tg tg-section_header_text_color">tg-section_header_text_color</div>*/}
+            {/*    <div className="tg tg-subtitle_text_color">tg-subtitle_text_color</div>*/}
+            {/*</div>*/}
             <Routes>
                 <Route index element={<Loading /> } />
                 <Route path='login' element={<LoginPage user={user} setUser={setUser} />} />
