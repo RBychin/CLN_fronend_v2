@@ -33,8 +33,6 @@ export const StoriesSwiper = ({ storyList, updateStories }) => {
         window.open(url)
     }
 
-    console.log(storyList)
-
     return (
         <Swiper
             modules={[]}

@@ -7,6 +7,7 @@ import { getApiRequest } from "./utills/requests";
 import { Config } from "./utills/config";
 import {Loading} from "./components/Loading";
 import {ErrorPage} from "./pages/ErrorPage/ErrorPage";
+import {PaymentPage} from "./pages/PaymentPage/PaymentPage";
 
 function App() {
     const navigate = useNavigate()
@@ -23,7 +24,6 @@ function App() {
 
     useEffect(() => {
         Config.tgWindow.expand()
-        console.log('PHOTO', Config.user.photo_url)
         const fetchData = async () => {
             try {
                 const response = await getApiRequest('', { id: Config.user.id });
@@ -44,7 +44,6 @@ function App() {
         };
 
         fetchData();
-        console.warn(user)
     }, [user.state]);
 
     if (!user.data || loading) {return <Loading />}
@@ -56,6 +55,7 @@ function App() {
                 <Route path='login' element={<LoginPage user={user} setUser={setUser} />} />
                 <Route path='account' element={<AccountPage user={user} setUser={setUser} />} />
                 <Route path='error' element={<ErrorPage />} />
+                <Route path='pay' element={<PaymentPage />} />
             </Routes>
         </div>
     );

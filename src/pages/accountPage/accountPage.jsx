@@ -22,24 +22,23 @@ export const AccountPage = ({ user, setUser }) => {
         navigate('/login')
     }
 
+    const fetchData = async () => {
+        try {
+            const [transactionsResponse] = await Promise.all([
+                getApiRequest('/transactions', { id: Config.user.id })
+            ]);
+            setTransactions(Object.values(transactionsResponse));
+            Config.tgWindow.HapticFeedback.notificationOccurred('success')
+        } catch (error) {
+            console.error('Error fetching data:', error);
+        } finally {
+            setLoading(false);
+        }
+    };
+
     useEffect(() => {
         setUser({...user, state: null})
-        const fetchData = async () => {
-            try {
-                const [transactionsResponse] = await Promise.all([
-                    getApiRequest('/transactions', { id: Config.user.id })
-                ]);
-                setTransactions(Object.values(transactionsResponse));
-                Config.tgWindow.HapticFeedback.notificationOccurred('success')
-            } catch (error) {
-                console.error('Error fetching data:', error);
-            } finally {
-                setLoading(false);
-            }
-        };
-
         fetchData();
-        console.warn(user)
     }, []);
 
     if (!user.data || loading) {return <Loading />}
@@ -53,23 +52,14 @@ export const AccountPage = ({ user, setUser }) => {
             <div className='block vw-85'>
                 <p className='hint'>Аккаунт</p>
                 {Object.values(user.data).map((point, index) => (
-                    point.error ? (
-                        <AccountsList key={index}
-                                      id={point.pin}
-                                      balance=''
-                                      status={false}
-                                      account={point.error}
-                                      setUser={setUser}
-                                      user={user}/>
-                    ) : (
-                        <AccountsList key={index}
-                                      id={point.pin}
-                                      balance={point.balance}
-                                      status={true}
-                                      account={Object.keys(point.points)[0]}
-                                      setUser={setUser}
-                                      user={user}/>
-                    )
+                    <AccountsList key={index}
+                                  callback={fetchData}
+                                  point={point}
+                                  status={!point.error}
+                                  accountName={point.error?point.error: Object.keys(point.points)[0]}
+                                  setUser={setUser}
+                                  user={user}
+                    />
                 ))}
                 <div className={`container-login ${login ? 'show' : ''}`}>
                         <div onClick={() => {setUser({...user, state:'login'}); navigate('/login')}}>Добавить аккаунт</div>

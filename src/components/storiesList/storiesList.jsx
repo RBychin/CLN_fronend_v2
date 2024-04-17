@@ -22,7 +22,6 @@ export const StoriesList = () => {
                 setTimeout(() => {
                     setLoading(false)
                 }, 0)
-                console.log(stories)
             }
         };
 
