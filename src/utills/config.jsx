@@ -10,6 +10,7 @@ const getConfig = () => {
     }
 
     try {
+        console.log(window.Telegram.WebApp)
         tgWindow = window.Telegram.WebApp
         if (tgWindow.initDataUnsafe.user) {
             user = tgWindow.initDataUnsafe.user

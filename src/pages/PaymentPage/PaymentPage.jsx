@@ -11,7 +11,7 @@ export const PaymentPage = ({
     pay
                             }) => {
     const [responseData, setResponseData] = useState(null);
-    const [sumValue, setSum] = useState(account.tarif.abon);
+    const [sumValue, setSum] = useState(+account.tarif.abon);
     const mainButton = Config.tgWindow.MainButton
 
     const getQr = async () => {
@@ -27,18 +27,20 @@ export const PaymentPage = ({
         mainButton.hideProgress()
     }
 
-    const payButton = () => {
+    const payButtonClick = () => {
         const Url = responseData.replace(/\?.*$/, '');
         window.open(Url, '_blank');
     }
 
     const onChangeSum = (sum) => {
         if (isNaN(sum)) {
-            sum = 0
+            setSum(0);
+            return;
         }
         setSum(sum)
         if (sum > 9) {
-            getQr(sum)
+            setSum(sum);
+            getQr(sumValue)
         }
     }
 
@@ -48,16 +50,16 @@ export const PaymentPage = ({
             mainButton.show()
         return () => {
             mainButton.hide()
-            mainButton.offClick(payButton)
-        }
+            mainButton.offClick(payButtonClick)
+            }
         }
     }, []);
 
     useEffect(() => {
-        mainButton.onClick(payButton);
+        mainButton.onClick(payButtonClick);
 
         return () => {
-            mainButton.offClick(payButton);
+            mainButton.offClick(payButtonClick);
         };
     }, [responseData]);
 
@@ -90,7 +92,7 @@ export const PaymentPage = ({
                             {sumValue > 9 && responseData && Config.tgWindow.platform === "unknown" &&
                                 <Button
                                     text="Оплатить"
-                                    onClick={payButton}
+                                    onClick={payButtonClick}
                                     isMain={true}
                                 />
                             }
